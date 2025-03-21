@@ -6,7 +6,7 @@ const AsyncLock = require('async-lock');
 
 const lock = new AsyncLock();
 // File paths
-const inputFilePath = path.join("C:\\Users\\018073\\Desktop\\partnerlist - automation\\partnerlistaccounts.xls");
+const inputFilePath = path.join("C:\\Users\\018073\\Desktop\\partnerlist - automation\\partnerlistaccounts.xlsx");
 const outputFilePath = path.join("C:\\Users\\018073\\Desktop\\partnerlist - automation\\partnerlistaccounts_updated.xlsx");
 
 let workbook;
