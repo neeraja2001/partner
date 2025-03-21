@@ -8,8 +8,7 @@ const lock = new AsyncLock();
 // File paths
 const inputFilePath = path.join("C:\\Users\\018073\\Desktop\\partnerlist - automation\\partnerlistaccounts.xls");
 const outputFilePath = path.join("C:\\Users\\018073\\Desktop\\partnerlist - automation\\partnerlistaccounts_updated.xlsx");
-const xlsFile = xlsx.readFile("partnerlistaccounts.xls");
-xlsx.writeFile(xlsFile, "partnerlistaccounts.xlsx");
+
 let workbook;
 let worksheet;
 let isWorksheetCleared = false;
