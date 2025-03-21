@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # You can change to windows-latest if required
+    runs-on: ubuntu-latest  # Change to 'windows-latest' if required
 
     steps:
       - name: Checkout code
@@ -19,10 +19,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18  # Change this to match your Node.js version
+          node-version: 18  # Ensure this matches your project's Node.js version
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci  # 'npm ci' is faster and recommended for CI environments
+
+      - name: Fix Permissions (if needed)
+        run: chmod +x node_modules/.bin/playwright || true
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
