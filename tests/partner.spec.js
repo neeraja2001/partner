@@ -6,9 +6,8 @@ const AsyncLock = require("async-lock");
 const lock = new AsyncLock();
 
 
-const inputFilePath = path.join(__dirname, "partnerlistaccounts.xlsx");
-const outputFilePath = path.join(__dirname, "partnerlistaccounts_updated.xlsx");
-
+const inputFilePath = path.resolve(process.env.INPUT_FILE || './partnerlistaccounts.xlsx');
+const outputFilePath = path.resolve(process.env.OUTPUT_FILE || './partnerlistaccounts_updated.xlsx');
 let workbook;
 let worksheet;
 let isWorksheetCleared = false;
