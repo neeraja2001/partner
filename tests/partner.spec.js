@@ -2,10 +2,10 @@ const xlsx = require('xlsx');
 const path = require('path');
 const { test, expect, chromium } = require('@playwright/test');
 const ExcelJS = require('exceljs'); // Install: npm install exceljs
-const AsyncLock = require('async-lock');
-
+const AsyncLock = require("async-lock");
 const lock = new AsyncLock();
-// File paths
+
+
 const inputFilePath = path.join("C:\\Users\\018073\\Desktop\\partnerlist - automation\\partnerlistaccounts.xlsx");
 const outputFilePath = path.join("C:\\Users\\018073\\Desktop\\partnerlist - automation\\partnerlistaccounts_updated.xlsx");
 
@@ -102,18 +102,16 @@ test.describe('Partner circuit list', () => {
         await page.fill('id=username', username);
         await page.fill('id=password', password);
         console.log(`Login attempt for ${username}`);
-
         await page.click('id=kc-login');
-        while (true) {
-          await page.reload({ waitUntil: 'networkidle' });
-          try {
-            await page.waitForURL('https://sifyaakaash.net/#/partner-circuit-list', { timeout: 20000 });
-            console.log('Successfully navigated to Partner Circuit List page');
-            break;
-          } catch (error) {
-            console.log('Still not on the right page, reloading...');
-          }
-        }
+        await page.waitForTimeout(3000);
+        //click active list 
+        const element = page.locator("div.card.card-total p");
+        await element.click();
+        await page.waitForTimeout(1000);
+      
+        await page.waitForURL('https://sifyaakaash.net/#/partner-circuit-list', { timeout: 20000 });
+        console.log('Successfully navigated to Partner Circuit List page');
+          
 
         // Count retrieval
         const countLocator = page.locator('//my-app/partner/section/section/div[2]/data-grid/div/div[2]/div/div/div[3]/a');
@@ -121,6 +119,7 @@ test.describe('Partner circuit list', () => {
         const text = await countLocator.textContent();
         console.log(`Total count for ${username}:`, text);
         countValue = parseInt(text, 10);
+        console.log("the count is ", countValue)
         expect(countValue).toBeGreaterThan(0);
         status = "Success";
 
