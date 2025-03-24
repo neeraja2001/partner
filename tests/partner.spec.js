@@ -6,6 +6,7 @@ const AsyncLock = require("async-lock");
 const lock = new AsyncLock();
 
 
+
 const inputFilePath = path.resolve(process.env.INPUT_FILE || './partnerlistaccounts.xlsx');
 const outputFilePath = path.resolve(process.env.OUTPUT_FILE || './partnerlistaccounts_updated.xlsx');
 let workbook;
@@ -76,7 +77,7 @@ test.describe('Partner circuit list', () => {
     }
 
     test(`Circuit list count for ${username} - Row ${index + 1}`, async () => {
-      const browser = await chromium.launch({ headless: false });
+      const browser = await chromium.launch({ headless: true });
       const context = await browser.newContext({
         ignoreHTTPSErrors: true,
         userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
